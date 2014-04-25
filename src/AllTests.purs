@@ -5,11 +5,16 @@ import Debug.Trace
 
 main = do
   trace ""
+  trace ":: Data.Either ::"
+  trace ""
+  Test.Data.Either.main
+  
+  trace ""
   trace ":: Data.Maybe ::"
   trace ""
   Test.Data.Maybe.main
   
   trace ""
-  trace ":: Data.Either ::"
+  trace ":: Data.Tuple ::"
   trace ""
-  Test.Data.Either.main
+  Test.Data.Tuple.main

@@ -12,6 +12,7 @@
     "purescript-globals": "*",
     "purescript-math": "*",
     "purescript-maybe": "*",
+    "purescript-monoid": "*",
     "purescript-quickcheck": "*",
     "purescript-random": "*",
     "purescript-read": "*",

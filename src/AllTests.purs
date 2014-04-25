@@ -4,6 +4,12 @@ import Control.Monad.Eff
 import Debug.Trace
 
 main = do
+  
+  trace ""
+  trace ":: Data.Array ::"
+  trace ""
+  Test.Data.Array.main
+  
   trace ""
   trace ":: Data.Either ::"
   trace ""

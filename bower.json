@@ -1,0 +1,23 @@
+{
+  "name": "core-tests",
+  "private": true,
+  "dependencies": {
+    "purescript-arrays": "*",
+    "purescript-control": "*",
+    "purescript-either": "*",
+    "purescript-enums": "*",
+    "purescript-exceptions": "*",
+    "purescript-foldable-traversable": "*",
+    "purescript-foreign": "*",
+    "purescript-globals": "*",
+    "purescript-math": "*",
+    "purescript-maybe": "*",
+    "purescript-quickcheck": "*",
+    "purescript-random": "*",
+    "purescript-read": "*",
+    "purescript-refs": "*",
+    "purescript-strings": "*",
+    "purescript-tuples": "*",
+    "purescript-validation": "*"
+  }
+}

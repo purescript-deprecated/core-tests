@@ -15,7 +15,6 @@
     "purescript-monoid": "*",
     "purescript-quickcheck": "*",
     "purescript-random": "*",
-    "purescript-read": "*",
     "purescript-refs": "*",
     "purescript-strings": "*",
     "purescript-tuples": "*",

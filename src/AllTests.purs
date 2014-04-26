@@ -24,3 +24,8 @@ main = do
   trace ":: Data.Tuple ::"
   trace ""
   Test.Data.Tuple.main
+  
+  trace ""
+  trace ":: Data.Validation ::"
+  trace ""
+  Test.Data.Validation.main

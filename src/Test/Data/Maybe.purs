@@ -9,9 +9,6 @@ import Test.Classes
 
 type Ty = Maybe Number
 
-instance arbMaybe :: (Arbitrary a) => Arbitrary (Maybe a) where
-  arbitrary = runTestMaybe <$> arbitrary
-
 main = do
 
   let ty = Just 0
@@ -44,15 +41,17 @@ main = do
   trace "isNothing should return the appropriate value"
   assert $ isNothing Nothing == true
   assert $ isNothing (Just {}) == false
+  
+  let tty = TestMaybe (Just 0)
 
   trace "test functor laws"
-  checkFunctor ty
+  checkFunctor tty
 
   trace "test applicative laws"
-  checkApplicative ty ty ty
+  checkApplicative tty tty tty
 
   trace "test monad laws"
-  checkMonad ty
+  checkMonad tty
 
 assert :: Boolean -> QC {}
 assert = quickCheck' 1
@@ -62,10 +61,3 @@ check1 = quickCheck
 
 check2 :: (Number -> Number -> Boolean) -> QC {}
 check2 = quickCheck
-
-instance arbAToMaybeB :: (Arbitrary (a -> b)) => Arbitrary (a -> Maybe b) where
-  arbitrary = do
-    f <- arbitrary
-    jn <- arbitrary
-    return $ \x -> if jn then Just (f x) else Nothing
-

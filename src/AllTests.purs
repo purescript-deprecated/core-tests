@@ -26,6 +26,16 @@ main = do
   Test.Data.Maybe.main
   
   trace ""
+  trace ":: Data.String ::"
+  trace ""
+  Test.Data.String.main
+
+  trace ""
+  trace ":: Data.String.Regex ::"
+  trace ""
+  Test.Data.String.Regex.main
+  
+  trace ""
   trace ":: Data.Tuple ::"
   trace ""
   Test.Data.Tuple.main
@@ -44,8 +54,3 @@ main = do
   trace ":: Math ::"
   trace ""
   Test.Math.main
-
-  trace ""
-  trace ":: Data.String.Regex ::"
-  trace ""
-  Test.Data.String.Regex.main

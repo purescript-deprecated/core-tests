@@ -4,9 +4,13 @@ import Data.Either
 import Debug.Trace
 import Control.Monad.Eff
 import Test.QuickCheck
+import Test.QuickCheck.Either
 import Test.Classes
 
 type Ty = Either Number Number
+
+instance arbEither :: (Arbitrary a, Arbitrary b) => Arbitrary (Either a b) where
+  arbitrary = runTestEither <$> arbitrary
 
 main = do
 
@@ -40,7 +44,6 @@ main = do
   assert $ isRight (Right {}) == true
   assert $ isRight (Left {})  == false
 
-  {-
   trace "test functor laws"
   checkFunctor ty
 
@@ -49,7 +52,6 @@ main = do
 
   trace "test monad laws"
   checkMonad ty
-  -}
 
 assert :: Boolean -> QC {}
 assert = quickCheck' 1

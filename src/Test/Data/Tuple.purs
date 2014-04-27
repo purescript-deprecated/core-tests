@@ -11,6 +11,9 @@ import Test.Classes
 
 type Ty = Tuple [Number] [Number]
 
+instance arbTuple :: (Arbitrary a, Arbitrary b) => Arbitrary (Tuple a b) where
+  arbitrary = runTestTuple <$> arbitrary
+
 main = do
 
   let ty = Tuple [0] [1]
@@ -27,7 +30,6 @@ main = do
   trace "test ordering on the second element (when first element is equal)"
   check3 \a b x -> compare (Tuple x a) (Tuple x b) == compare a b
  
-  {- 
   trace "test functor laws"
   checkFunctor ty
 
@@ -36,7 +38,6 @@ main = do
 
   trace "test monad laws"
   checkMonad ty
-  -}
 
   trace "fst should return the first element"
   check2 $ \x y -> fst (Tuple x y) == x

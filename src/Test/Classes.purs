@@ -1,14 +1,12 @@
 module Test.Classes where
 
-{-
-
-import Test.QuickCheck (QC(..), Arbitrary, quickCheck)
+import Test.QuickCheck (QC(..), Arbitrary, CoArbitrary, quickCheck)
 
 -- |
 -- Functor
 --
 
-checkFunctor :: forall f a. (Functor f, Arbitrary a, Arbitrary (a -> a), Arbitrary (f a), Eq (f a)) => f a -> QC
+checkFunctor :: forall f a. (Functor f, Arbitrary a, CoArbitrary a, Arbitrary (f a), Eq (f a)) => f a -> QC {}
 checkFunctor t = do
   quickCheck $ identity t
   quickCheck $ associativity t
@@ -25,7 +23,7 @@ checkFunctor t = do
 -- Applicative
 --
 
-checkApplicative :: forall f a b c. (Applicative f, Arbitrary (f a), Arbitrary (f (a -> b)), Arbitrary (f (b -> c)), Arbitrary (a -> b), Arbitrary a, Eq (f a), Eq (f b), Eq (f c)) => f a -> f b -> f c -> QC
+checkApplicative :: forall f a b c. (Applicative f, Arbitrary (f a), Arbitrary (f (a -> b)), Arbitrary (f (b -> c)), CoArbitrary a, Arbitrary b, Arbitrary a, Eq (f a), Eq (f b), Eq (f c)) => f a -> f b -> f c -> QC {}
 checkApplicative ta tb tc = do
   quickCheck $ identity ta
   quickCheck $ composition ta tb tc
@@ -40,7 +38,7 @@ checkApplicative ta tb tc = do
   composition :: forall f a b c. (Applicative f, Arbitrary (f (b -> c)), Arbitrary (f (a -> b)), Arbitrary (f a), Eq (f c)) => f a -> f b -> f c -> f (b -> c) -> f (a -> b) -> f a -> Boolean
   composition _ _ _ u v w = (pure (<<<) <*> u <*> v <*> w) == (u <*> (v <*> w))
 
-  homomorphism :: forall f a b. (Applicative f, Arbitrary (a -> b), Arbitrary a, Eq (f b)) => f a -> f b -> (a -> b) -> a -> Boolean
+  homomorphism :: forall f a b. (Applicative f, Arbitrary b, CoArbitrary a, Arbitrary a, Eq (f b)) => f a -> f b -> (a -> b) -> a -> Boolean
   homomorphism _ tb f x = (pure f <*> pure x) == (pure (f x) `asTypeOf` tb)
 
   interchange :: forall f a b. (Applicative f, Arbitrary a, Arbitrary (f (a -> b)), Eq (f b)) => f a -> f b -> a -> f (a -> b) -> Boolean
@@ -50,7 +48,7 @@ checkApplicative ta tb tc = do
 -- Monad
 --
 
-checkMonad :: forall m a. (Monad m, Arbitrary a, Arbitrary (a -> m a), Arbitrary (m a), Eq (m a)) => m a -> QC
+checkMonad :: forall m a. (Monad m, Arbitrary a, CoArbitrary a, Arbitrary (m a), Eq (m a)) => m a -> QC {}
 checkMonad t = do
   quickCheck $ leftIdentity t
   quickCheck $ rightIdentity t
@@ -66,4 +64,4 @@ checkMonad t = do
 
   associativity :: forall m a. (Monad m, Arbitrary a, Eq (m a)) => m a -> m a -> (a -> m a) -> (a -> m a) -> Boolean
   associativity _ m f g = ((m >>= f) >>= g) == (m >>= (\x -> f x >>= g))
--}
+

@@ -4,9 +4,13 @@ import Data.Maybe
 import Debug.Trace
 import Control.Monad.Eff
 import Test.QuickCheck
+import Test.QuickCheck.Maybe
 import Test.Classes
 
 type Ty = Maybe Number
+
+instance arbMaybe :: (Arbitrary a) => Arbitrary (Maybe a) where
+  arbitrary = runTestMaybe <$> arbitrary
 
 main = do
 
@@ -41,7 +45,6 @@ main = do
   assert $ isNothing Nothing == true
   assert $ isNothing (Just {}) == false
 
-  {-
   trace "test functor laws"
   checkFunctor ty
 
@@ -50,7 +53,6 @@ main = do
 
   trace "test monad laws"
   checkMonad ty
-  -}
 
 assert :: Boolean -> QC {}
 assert = quickCheck' 1

@@ -14,6 +14,11 @@ main = do
   trace ":: Data.Either ::"
   trace ""
   Test.Data.Either.main
+    
+  trace ""
+  trace ":: Data.Enum ::"
+  trace ""
+  Test.Data.Enum.main
   
   trace ""
   trace ":: Data.Maybe ::"

@@ -9,12 +9,7 @@ import Test.Classes
 
 type Ty = Either Number Number
 
-instance arbEither :: (Arbitrary a, Arbitrary b) => Arbitrary (Either a b) where
-  arbitrary = runTestEither <$> arbitrary
-
 main = do
-
-  let ty = Left 0 :: Ty
 
   trace "test equality"
   check1 $ \n -> Left n  == Left n :: Ty
@@ -43,15 +38,17 @@ main = do
   trace "isRight should return the appropriate value"
   assert $ isRight (Right {}) == true
   assert $ isRight (Left {})  == false
+  
+  let tty = TestEither (Left 0) :: (TestEither Number Number)
 
   trace "test functor laws"
-  checkFunctor ty
+  checkFunctor tty
 
   trace "test applicative laws"
-  checkApplicative ty ty ty
+  checkApplicative tty tty tty
 
   trace "test monad laws"
-  checkMonad ty
+  checkMonad tty
 
 assert :: Boolean -> QC {}
 assert = quickCheck' 1
@@ -61,11 +58,3 @@ check1 = quickCheck
 
 check2 :: (Number -> Number -> Boolean) -> QC {}
 check2 = quickCheck
-
-instance arbAToEitherBC :: (Arbitrary (a -> b), Arbitrary (a -> c)) => Arbitrary (a -> Either b c) where
-  arbitrary = do
-    f <- arbitrary
-    g <- arbitrary
-    lr <- arbitrary
-    return $ \x -> if lr then Left (f x) else Right (g x)
-

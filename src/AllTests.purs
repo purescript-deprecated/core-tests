@@ -39,3 +39,8 @@ main = do
   trace ":: Global ::"
   trace ""
   Test.Global.main
+  
+  trace ""
+  trace ":: Math ::"
+  trace ""
+  Test.Math.main

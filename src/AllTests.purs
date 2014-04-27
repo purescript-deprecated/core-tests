@@ -34,3 +34,8 @@ main = do
   trace ":: Data.Validation ::"
   trace ""
   Test.Data.Validation.main
+  
+  trace ""
+  trace ":: Global ::"
+  trace ""
+  Test.Global.main

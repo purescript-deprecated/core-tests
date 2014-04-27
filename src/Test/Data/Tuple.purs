@@ -11,12 +11,9 @@ import Test.Classes
 
 type Ty = Tuple [Number] [Number]
 
-instance arbTuple :: (Arbitrary a, Arbitrary b) => Arbitrary (Tuple a b) where
-  arbitrary = runTestTuple <$> arbitrary
-
 main = do
 
-  let ty = Tuple [0] [1]
+  let tty = TestTuple (Tuple [0] [1])
 
   trace "test equality"
   check2 $ \x y -> Tuple x y == Tuple x y
@@ -31,13 +28,13 @@ main = do
   check3 \a b x -> compare (Tuple x a) (Tuple x b) == compare a b
  
   trace "test functor laws"
-  checkFunctor ty
+  checkFunctor tty
 
   trace "test applicative laws"
-  checkApplicative ty ty ty
+  checkApplicative tty tty tty
 
   trace "test monad laws"
-  checkMonad ty
+  checkMonad tty
 
   trace "fst should return the first element"
   check2 $ \x y -> fst (Tuple x y) == x
@@ -83,12 +80,6 @@ check2 = quickCheck
 
 check3 :: (Number -> Number -> Number -> Boolean) -> QC {}
 check3 = quickCheck
-
-instance arbAToTupleBC :: (Arbitrary (a -> b), Arbitrary (a -> c)) => Arbitrary (a -> Tuple b c) where
-  arbitrary = do
-    f <- arbitrary
-    g <- arbitrary
-    return $ \x -> Tuple (f x) (g x)
 
 compareZip :: forall a b. (Eq a, Eq b) => [a] -> [b] -> [Tuple a b] -> Boolean
 compareZip (x : xs) (y : ys) ((Tuple x' y') : ts) = x == x' && y == y' && compareZip xs ys ts

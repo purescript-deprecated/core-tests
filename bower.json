@@ -18,6 +18,7 @@
     "purescript-refs": "*",
     "purescript-strings": "*",
     "purescript-tuples": "*",
+    "purescript-arb-instances": "*",
     "purescript-validation": "*"
   }
 }

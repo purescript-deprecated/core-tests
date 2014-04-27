@@ -44,3 +44,8 @@ main = do
   trace ":: Math ::"
   trace ""
   Test.Math.main
+
+  trace ""
+  trace ":: Data.String.Regex ::"
+  trace ""
+  Test.Data.String.Regex.main

@@ -41,8 +41,9 @@ main = do
   assert $ length "abdc" == 4
   
   trace "localeCompare should perform a locale-sensitive comparison"
-  assert $ indexOf "b" "abc" == 1
-  assert $ indexOf "q" "abc" == -1
+  print $ localeCompare "a" "c" < 0
+  print $ localeCompare "a" "a" == 0
+  print $ localeCompare "c" "a" > 0
   
   trace "replace should replace one substring with another"
   assert $ replace "bar" "baz" "foobar" == "foobaz"

@@ -23,9 +23,17 @@ main = do
   assert $ indexOf "b" "abc" == 1
   assert $ indexOf "q" "abc" == -1
   
+  trace "indexOf' should return the index for a substring starting from an offset"
+  assert $ indexOf' "b" 2 "abcb" == 3
+  assert $ indexOf' "q" 2 "abcb" == -1
+  
   trace "lastIndexOf should return the last index for a substring"
   assert $ lastIndexOf "a" "abca" == 3
   assert $ lastIndexOf "q" "abca" == -1
+  
+  trace "lastIndexOf' should return the last index for a substring starting from an offset"
+  assert $ lastIndexOf' "a" 1 "abca" == 0
+  assert $ lastIndexOf' "q" 1 "abca" == -1
   
   trace "length should return the length of a string"
   assert $ length "" == 0

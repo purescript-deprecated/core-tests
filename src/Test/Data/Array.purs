@@ -90,6 +90,9 @@ main = do
 
   trace "map should transform every item in an array"
   checkA1 $ \xs -> sum (map double xs) == double (sum xs)
+  
+  trace "mapMaybe should transform every item in an array, throwing out Nothing values"
+  assert $ mapMaybe (\x -> if x % 2 == 0 then Just x else Nothing) [0, 1, 2, 3, 4, 5] == [0, 2, 4]
 
   trace "length should return the number of items in an array"
   checkA1 $ \xs -> length xs == sum (map one xs)

@@ -1,5 +1,7 @@
 module Test.Data.String.Regex where
 
+import Data.Array (reverse)
+import Data.String (joinWith)
 import Data.String.Regex
 import Debug.Trace
 import Control.Monad.Eff
@@ -17,8 +19,11 @@ main = do
   trace "test 'test' reports false for a mismatch"
   assert $ not $ test r "foo"
 
-  trace "test 'replaceR' replaces all matches"
-  assert $ replaceR r "work" "testing testing 1 2 3" == "working working 1 2 3" 
+  trace "test 'replace' replaces all matches"
+  assert $ replace r "work" "testing testing 1 2 3" == "working working 1 2 3"
+
+  trace "test 'replace'' replaces matches with a function"
+  assert $ replace' (regex "(some) (test)" "") (\match groups -> joinWith " " (reverse groups)) "here are some test words" == "here are test some words"
 
   trace "test 'search' finds the first match"
   assert $ search r "the string 'test' first appears in this test at index 12" == 12

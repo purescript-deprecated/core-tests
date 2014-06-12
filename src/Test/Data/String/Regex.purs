@@ -7,7 +7,7 @@ import Debug.Trace
 import Control.Monad.Eff
 import qualified Test.QuickCheck as QC
 
-assert :: Boolean -> QC.QC {}
+assert :: Boolean -> QC.QC Unit
 assert = QC.quickCheck' 1
 
 main = do

@@ -75,10 +75,10 @@ main = do
   trace "swap should switch the first and second element"
   check2 $ \x y -> swap (Tuple x y) == (Tuple y x)
 
-check2 :: (Number -> Number -> Boolean) -> QC {}
+check2 :: (Number -> Number -> Boolean) -> QC Unit
 check2 = quickCheck
 
-check3 :: (Number -> Number -> Number -> Boolean) -> QC {}
+check3 :: (Number -> Number -> Number -> Boolean) -> QC Unit
 check3 = quickCheck
 
 compareZip :: forall a b. (Eq a, Eq b) => [a] -> [b] -> [Tuple a b] -> Boolean

@@ -172,11 +172,11 @@ main = do
   checkMonad ty
 
 
-assert :: Boolean -> QC {}
+assert :: Boolean -> QC Unit
 assert = quickCheck' 1
 
-check1 :: (Number -> Boolean) -> QC {}
+check1 :: (Number -> Boolean) -> QC Unit
 check1 = quickCheck
 
-checkA1 :: ([Number] -> Boolean) -> QC {}
+checkA1 :: ([Number] -> Boolean) -> QC Unit
 checkA1 = quickCheck

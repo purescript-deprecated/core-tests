@@ -11,11 +11,11 @@ foreign import throw
   \  throw msg;\
   \}" :: forall a. String -> a
 
-assert :: forall eff. String -> Boolean -> Eff eff {}
-assert _ true = return {}
+assert :: forall eff. String -> Boolean -> Eff eff Unit
+assert _ true = return unit
 assert msg false = throw ("Test failed: " ++ msg)
 
-assertInvalid :: forall err result eff. (Show err, Eq err) => err -> String -> V err result -> Eff (trace :: Trace | eff) {}
+assertInvalid :: forall err result eff. (Show err, Eq err) => err -> String -> V err result -> Eff (trace :: Trace | eff) Unit
 assertInvalid expectedError msg = assert msg <<< runV ((==) expectedError) (const false)
 
 data Test a b = Test a b

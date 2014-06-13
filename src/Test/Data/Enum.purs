@@ -43,5 +43,5 @@ main = do
   assert $ pred A == Nothing
 
 
-assert :: Boolean -> QC {}
+assert :: Boolean -> QC Unit
 assert = quickCheck' 1

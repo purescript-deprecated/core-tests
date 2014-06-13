@@ -106,5 +106,5 @@ main = do
   assert $ sqrt1_2 =~= sqrt (1 / 2)
   assert $ sqrt2 =~= sqrt 2
 
-assert :: Boolean -> QC {}
+assert :: Boolean -> QC Unit
 assert = quickCheck' 1

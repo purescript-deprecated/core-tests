@@ -35,12 +35,12 @@ main = do
   check1 $ \n -> maybe n id Nothing == n
 
   trace "isJust should return the appropriate value"
-  assert $ isJust (Just {}) == true
+  assert $ isJust (Just unit) == true
   assert $ isJust Nothing == false
 
   trace "isNothing should return the appropriate value"
   assert $ isNothing Nothing == true
-  assert $ isNothing (Just {}) == false
+  assert $ isNothing (Just unit) == false
   
   let tty = TestMaybe (Just 0)
 
@@ -53,11 +53,11 @@ main = do
   trace "test monad laws"
   checkMonad tty
 
-assert :: Boolean -> QC {}
+assert :: Boolean -> QC Unit
 assert = quickCheck' 1
   
-check1 :: (Number -> Boolean) -> QC {}
+check1 :: (Number -> Boolean) -> QC Unit
 check1 = quickCheck
 
-check2 :: (Number -> Number -> Boolean) -> QC {}
+check2 :: (Number -> Number -> Boolean) -> QC Unit
 check2 = quickCheck

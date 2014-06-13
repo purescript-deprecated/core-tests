@@ -32,5 +32,5 @@ main = do
   assert $ readFloat "0" == 0
   assert $ readFloat "0.2" == 0.2
 
-assert :: Boolean -> QC {}
+assert :: Boolean -> QC Unit
 assert = quickCheck' 1

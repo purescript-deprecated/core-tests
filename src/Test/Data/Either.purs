@@ -32,12 +32,12 @@ main = do
   check1 $ \n -> either id negate (Right n :: Ty) == -n
 
   trace "isLeft should return the appropriate value"
-  assert $ isLeft (Left {})  == true
-  assert $ isLeft (Right {}) == false
+  assert $ isLeft (Left unit)  == true
+  assert $ isLeft (Right unit) == false
 
   trace "isRight should return the appropriate value"
-  assert $ isRight (Right {}) == true
-  assert $ isRight (Left {})  == false
+  assert $ isRight (Right unit) == true
+  assert $ isRight (Left unit)  == false
   
   let tty = TestEither (Left 0) :: (TestEither Number Number)
 
@@ -50,11 +50,11 @@ main = do
   trace "test monad laws"
   checkMonad tty
 
-assert :: Boolean -> QC {}
+assert :: Boolean -> QC Unit
 assert = quickCheck' 1
 
-check1 :: (Number -> Boolean) -> QC {}
+check1 :: (Number -> Boolean) -> QC Unit
 check1 = quickCheck
 
-check2 :: (Number -> Number -> Boolean) -> QC {}
+check2 :: (Number -> Number -> Boolean) -> QC Unit
 check2 = quickCheck

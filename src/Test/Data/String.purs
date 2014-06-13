@@ -72,5 +72,5 @@ main = do
   assert $ joinWith "," ["a", "b", "c", "d"] == "a,b,c,d"
   assert $ joinWith " " ["p", "q", "r"] == "p q r"
 
-assert :: Boolean -> QC {}
+assert :: Boolean -> QC Unit
 assert = quickCheck' 1

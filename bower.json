@@ -6,7 +6,7 @@
     "purescript-control": "*",
     "purescript-either": "*",
     "purescript-enums": "*",
-    "purescript-exceptions": "*",
+    "purescript-exceptions": "0.2.0",
     "purescript-foldable-traversable": "*",
     "purescript-foreign": "*",
     "purescript-globals": "*",

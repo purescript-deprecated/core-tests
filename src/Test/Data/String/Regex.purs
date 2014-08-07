@@ -12,7 +12,8 @@ assert = QC.quickCheck' 1
 
 main = do
 
-  let r = regex "test" "g"
+  let flags = { unicode: false, sticky: false, multiline: false, ignoreCase: false, global: true } 
+  let r = regex "test" flags
 
   trace "test 'test' matches correctly"
   assert $ test r "testing"
@@ -23,7 +24,7 @@ main = do
   assert $ replace r "work" "testing testing 1 2 3" == "working working 1 2 3"
 
   trace "test 'replace'' replaces matches with a function"
-  assert $ replace' (regex "(some) (test)" "") (\match groups -> joinWith " " (reverse groups)) "here are some test words" == "here are test some words"
+  assert $ replace' (regex "(some) (test)" flags) (\match groups -> joinWith " " (reverse groups)) "here are some test words" == "here are test some words"
 
   trace "test 'search' finds the first match"
   assert $ search r "the string 'test' first appears in this test at index 12" == 12

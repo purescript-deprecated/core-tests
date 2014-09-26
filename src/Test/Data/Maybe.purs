@@ -4,7 +4,6 @@ import Data.Maybe
 import Debug.Trace
 import Control.Monad.Eff
 import Test.QuickCheck
-import Test.QuickCheck.Maybe
 import Test.Classes
 
 type Ty = Maybe Number
@@ -42,7 +41,7 @@ main = do
   assert $ isNothing Nothing == true
   assert $ isNothing (Just unit) == false
   
-  let tty = TestMaybe (Just 0)
+  let tty = Just 0
 
   trace "test functor laws"
   checkFunctor tty

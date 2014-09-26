@@ -6,14 +6,13 @@ import Debug.Trace
 import Control.Monad.Eff
 import Math
 import Test.QuickCheck
-import Test.QuickCheck.Tuple
 import Test.Classes
 
 type Ty = Tuple [Number] [Number]
 
 main = do
 
-  let tty = TestTuple (Tuple [0] [1])
+  let tty = Tuple [0] [1]
 
   trace "test equality"
   check2 $ \x y -> Tuple x y == Tuple x y
@@ -59,17 +58,15 @@ main = do
   quickCheck testZipPairs
   
   trace "unzip should produce a tuple of lists that match the input length"
-  let testUnzipSize :: [TestTuple Number Number] -> Boolean
-      testUnzipSize ts = case unzip (map runTestTuple ts) of 
+  let testUnzipSize :: [Tuple Number Number] -> Boolean
+      testUnzipSize ts = case unzip ts of 
         (Tuple xs ys) -> length ts == length xs && length ts == length ys
   quickCheck testUnzipSize
   
   trace "unzip should produce tuple of a lists with elements in the original order"
-  let testUnzipPairs :: [TestTuple Number Number] -> Boolean
-      testUnzipPairs ts = 
-        let ts' = map runTestTuple ts in 
-        case unzip ts' of 
-          (Tuple xs ys) -> compareZip xs ys ts'
+  let testUnzipPairs :: [Tuple Number Number] -> Boolean
+      testUnzipPairs ts = case unzip ts of 
+        (Tuple xs ys) -> compareZip xs ys ts
   quickCheck testUnzipPairs
   
   trace "swap should switch the first and second element"

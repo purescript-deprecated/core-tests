@@ -4,7 +4,6 @@ import Data.Either
 import Debug.Trace
 import Control.Monad.Eff
 import Test.QuickCheck
-import Test.QuickCheck.Either
 import Test.Classes
 
 type Ty = Either Number Number
@@ -39,7 +38,7 @@ main = do
   assert $ isRight (Right unit) == true
   assert $ isRight (Left unit)  == false
   
-  let tty = TestEither (Left 0) :: (TestEither Number Number)
+  let tty = (Left 0) :: (Either Number Number)
 
   trace "test functor laws"
   checkFunctor tty

@@ -13,16 +13,26 @@ instance eqTestEnum :: Eq TestEnum where
   (==) B B = true
   (==) C C = true
   (==) _ _ = false
-  (/=) x y = not (x == y)
+
+  (/=) a b = not (a == b)
+
+instance ordTestEnum :: Ord TestEnum where
+  compare a b = fromEnum a `compare` fromEnum b
 
 instance enumTestEnum :: Enum TestEnum where
-  toEnum 1 = Just A
-  toEnum 2 = Just B
-  toEnum 3 = Just C
-  toEnum _ = Nothing
-  fromEnum A = 1
-  fromEnum B = 2
-  fromEnum C = 3
+  cardinality = Cardinality 3
+
+  firstEnum = A
+
+  lastEnum = C
+
+  succ A = Just B
+  succ B = Just C
+  succ C = Nothing
+
+  pred A = Nothing
+  pred B = Just A
+  pred C = Just B
 
 main = do
 

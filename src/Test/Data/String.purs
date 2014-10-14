@@ -1,6 +1,8 @@
 module Test.Data.String where
 
 import Data.String
+import Data.Char
+import Data.Maybe
 import Debug.Trace
 import Control.Monad.Eff
 import Test.QuickCheck
@@ -8,16 +10,16 @@ import Test.QuickCheck
 main = do
 
   trace "charAt should return the character at the specified index"
-  assert $ charAt 0 "abcd" == "a"
-  assert $ charAt 1 "abcd" == "b"
+  assert $ (charString <$> charAt 0 "abcd") == Just "a"
+  assert $ (charString <$> charAt 1 "abcd") == Just "b"
   
   trace "charCodeAt should return the character at the specified index"
   print $ charCodeAt 0 "abcd" == 97
   print $ charCodeAt 1 "abcd" == 98
   
   trace "fromCharCode should return a character for a char code"
-  assert $ fromCharCode 97 == "a"
-  assert $ fromCharCode 98 == "b"
+  assert $ (charString $ fromCharCode 97) == "a"
+  assert $ (charString $ fromCharCode 98) == "b"
   
   trace "indexOf should return the index for a substring"
   assert $ indexOf "b" "abc" == 1

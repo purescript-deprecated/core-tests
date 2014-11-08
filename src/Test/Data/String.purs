@@ -14,8 +14,8 @@ main = do
   assert $ (charString <$> charAt 1 "abcd") == Just "b"
   
   trace "charCodeAt should return the character at the specified index"
-  print $ charCodeAt 0 "abcd" == 97
-  print $ charCodeAt 1 "abcd" == 98
+  print $ charCodeAt 0 "abcd" == Just 97
+  print $ charCodeAt 1 "abcd" == Just 98
   
   trace "fromCharCode should return a character for a char code"
   assert $ (charString $ fromCharCode 97) == "a"

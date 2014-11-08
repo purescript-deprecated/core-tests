@@ -1,5 +1,6 @@
 module Test.Data.String.Regex where
 
+import Data.Maybe
 import Data.Array (reverse)
 import Data.String (joinWith)
 import Data.String.Regex
@@ -30,4 +31,4 @@ main = do
   assert $ search r "the string 'test' first appears in this test at index 12" == 12
 
   trace "test 'match' reports the correct number of matches"
-  assert $ match r "test test test" == ["test", "test", "test"]
+  assert $ match r "test test test" == Just ["test", "test", "test"]
